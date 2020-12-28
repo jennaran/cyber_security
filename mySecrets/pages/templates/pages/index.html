@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My Secrets</title>
+    </head>
+
+    <body>
+        <h1>User: {{ user.username }}</h1>
+        <button type="button"><a onclick="location.href='/logout'">Logout</a></button>
+
+        <h2>Add new secret</h2>
+        <form method="POST" action='add/'>
+            {% csrf_token %}
+            <input id="secret" name="secret" placeholder="Write your secret here" required="required" type="text">
+            <input type="submit" value="Add"/>
+        </form>
+
+        <h2>Your secrets</h2>
+        {% for secret in secrets %}
+        <ul>[{{ secret.id }}] {{ secret.secret }}</ul>
+        {% endfor %}
+
+        <h2>View</h2>
+        <form method="POST" action='view/'>
+            {% csrf_token %}
+            <input id="secret_id" name="secret_id" placeholder="Write secret's id here" required="required" type="text">
+            <input type="submit" value="View"/>
+        </form>
+    </body>
+</html>
