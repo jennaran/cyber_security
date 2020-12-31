@@ -53,10 +53,10 @@ def secretView(request):
     if request.method == 'POST':
         secret_id = request.POST.get('secret_id').strip()
         with connection.cursor() as cursor:
-            cursor.execute("SELECT * FROM pages_secret WHERE id=" + secret_id)
+            cursor.execute("SELECT secret FROM pages_secret WHERE id=" + secret_id)
             secret = cursor.fetchone()
             if secret is not None:
-                return render(request, 'pages/secret.html', {'secret': secret[1]})
+                return render(request, 'pages/secret.html', {'secret': secret[0]})
     return redirect("/")
 
 def logoutView(request):
